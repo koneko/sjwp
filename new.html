@@ -61,7 +61,7 @@
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     <style>
         .content {
-            width: 70%;
+            width: 65%;
             margin: 0 auto;
         }
         .search {
@@ -82,7 +82,6 @@
     function populate() {
         document.querySelector(".content").innerHTML = "";
         fetch("/blog/info.json").then(res => res.json()).then(data => {
-            // sort data by date (german date format) and limit to 5
             data.sort((a, b) => {
                 let dateA = a.date.split(".").reverse().join("-");
                 let dateB = b.date.split(".").reverse().join("-");
@@ -99,14 +98,14 @@
                         <a href="${post.url}">${post.name}</a>
                     </h2>
                     <div style="font-size: 11pt; font-weight: 50;">
-                        <span class="posted-on"><time class="entry-date published" datetime="2023-09-22T21:45:58+02:00"
+                        <span class="posted-on"><time class="entry-date published" datetime="${post.date}"
                                 itemprop="datePublished">${post.date}</time></span>
                     </div>
                 </header>
                 <div class="entry-summary" itemprop="text">
                     <p>${post.short} <a title="${post.name}" class="read-more"
                             href="${post.url}"
-                            aria-label="More on Web preglednici i web pretraživači">Opširnije</a></p>
+                            aria-label="${post.name}">Opširnije</a></p>
                 </div>
             </div>
         </article>
